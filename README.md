@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Personal Task Manager
 
 A beginner-friendly full stack project using Node.js + Express for the backend and React for the frontend.
@@ -69,3 +70,6 @@ npm run dev
 - The REST API is easy to explain and simple to extend.
 
 Enjoy building and explaining this project!
+=======
+# my-project
+>>>>>>> 447b078f1a7648b474f7c651fcf820d2bbae4ee9
