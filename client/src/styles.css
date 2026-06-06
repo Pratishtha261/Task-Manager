@@ -259,6 +259,26 @@ select {
   }
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.see-all-btn {
+  background: #1d4ed8;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.see-all-btn:hover {
+  background: #2563eb;
+}
+
 @media (max-width: 640px) {
   .dashboard-overview {
     grid-template-columns: 1fr;

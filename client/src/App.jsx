@@ -157,6 +157,12 @@ function App() {
     return due >= start && due <= end;
   });
 
+  function handleSeeAllTasks() {
+    setShowHome(false);
+    setFilter('All');
+    setSearchTerm('');
+  }
+
   if (showHome) {
     return (
       <div className="page-shell home-screen">
@@ -218,6 +224,9 @@ function App() {
         <div>
           <h1>Task Manager Dashboard</h1>
           <p className="subtitle">Welcome back! Manage your tasks efficiently.</p>
+        </div>
+        <div className="header-actions">
+          <button className="see-all-btn" onClick={handleSeeAllTasks}>See All Tasks</button>
         </div>
       </header>
 

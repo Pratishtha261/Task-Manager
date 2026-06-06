@@ -22,7 +22,7 @@
     "title": "shopping",
     "description": "",
     "dueDate": "2026-06-05",
-    "completed": false,
+    "completed": true,
     "createdAt": "2026-06-05T15:29:57.580Z",
     "priority": "Medium"
   },
@@ -43,5 +43,14 @@
     "completed": false,
     "createdAt": "2026-06-05T15:42:25.793Z",
     "priority": "Medium"
+  },
+  {
+    "id": "1780769848660",
+    "title": "washing machine",
+    "description": "",
+    "dueDate": "2026-06-06",
+    "completed": false,
+    "createdAt": "2026-06-06T18:17:28.660Z",
+    "priority": "High"
   }
 ]
