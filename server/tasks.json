@@ -1,0 +1,47 @@
+[
+  {
+    "id": "1780673150067",
+    "title": "assignment",
+    "description": "",
+    "dueDate": "2026-06-02",
+    "completed": false,
+    "createdAt": "2026-06-05T15:25:50.067Z",
+    "priority": "High"
+  },
+  {
+    "id": "1780673173793",
+    "title": "Bank work",
+    "description": "",
+    "dueDate": "2026-06-07",
+    "completed": true,
+    "createdAt": "2026-06-05T15:26:13.793Z",
+    "priority": "Medium"
+  },
+  {
+    "id": "1780673397579",
+    "title": "shopping",
+    "description": "",
+    "dueDate": "2026-06-05",
+    "completed": false,
+    "createdAt": "2026-06-05T15:29:57.580Z",
+    "priority": "Medium"
+  },
+  {
+    "id": "1780674073503",
+    "title": "Go to grocery store near sp chawk",
+    "description": "Vegetables, fruits, bread,butter",
+    "dueDate": "2026-06-05",
+    "completed": false,
+    "createdAt": "2026-06-05T15:41:13.504Z",
+    "priority": "High"
+  },
+  {
+    "id": "1780674145793",
+    "title": "Haircut",
+    "description": "",
+    "dueDate": "2026-06-08",
+    "completed": false,
+    "createdAt": "2026-06-05T15:42:25.793Z",
+    "priority": "Medium"
+  }
+]
