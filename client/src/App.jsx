@@ -216,14 +216,45 @@ function App() {
     <div className="page-shell">
       <header className="top-bar">
         <div>
-          <h1>Personal Task Manager</h1>
-          <p className="subtitle">Simple task cards, priorities, and clean daily tracking.</p>
-        </div>
-        <div className="status-pill">
-          <span>Active: {activeCount}</span>
-          <span>Completed: {completedCount}</span>
+          <h1>Task Manager Dashboard</h1>
+          <p className="subtitle">Welcome back! Manage your tasks efficiently.</p>
         </div>
       </header>
+
+      {/* Dashboard Overview Section */}
+      <section className="dashboard-overview">
+        <div className="stat-card">
+          <div className="stat-icon">📋</div>
+          <div className="stat-content">
+            <p className="stat-label">Total Tasks</p>
+            <p className="stat-value">{tasks.length}</p>
+          </div>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-icon">⏳</div>
+          <div className="stat-content">
+            <p className="stat-label">Active</p>
+            <p className="stat-value">{activeCount}</p>
+          </div>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-icon">✅</div>
+          <div className="stat-content">
+            <p className="stat-label">Completed</p>
+            <p className="stat-value">{completedCount}</p>
+          </div>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-icon">🔔</div>
+          <div className="stat-content">
+            <p className="stat-label">Due Today</p>
+            <p className="stat-value">{dueTodayTasks.length}</p>
+          </div>
+        </div>
+      </section>
 
       <main>
         <section className="form-panel card">

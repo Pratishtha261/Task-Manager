@@ -182,7 +182,7 @@ select {
   display: flex;
   gap: 18px;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 24px;
   flex-wrap: wrap;
 }
@@ -210,6 +210,59 @@ select {
   border-radius: 999px;
   color: #1f2937;
   font-weight: 600;
+}
+
+/* Dashboard Overview */
+.dashboard-overview {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e2e8f0;
+}
+
+.stat-icon {
+  font-size: 2.2rem;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-label {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.stat-value {
+  margin: 6px 0 0;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #1d4ed8;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-overview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard-overview {
+    grid-template-columns: 1fr;
+  }
 }
 
 main {
