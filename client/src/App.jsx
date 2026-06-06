@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const BACKEND_URL = 'http://localhost:4000';
 const priorities = ['Low', 'Medium', 'High'];
@@ -157,10 +157,16 @@ function App() {
     return due >= start && due <= end;
   });
 
+  const tasksRef = useRef(null);
+
   function handleSeeAllTasks() {
     setShowHome(false);
     setFilter('All');
     setSearchTerm('');
+    // Scroll to tasks after the UI updates
+    setTimeout(() => {
+      if (tasksRef.current) tasksRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 150);
   }
 
   if (showHome) {
@@ -323,7 +329,7 @@ function App() {
           </form>
         </section>
 
-        <section className="filter-panel card">
+        <section className="filter-panel card" ref={tasksRef}>
           <div className="filter-row">
             <h2>Tasks</h2>
             <div className="filter-buttons">
