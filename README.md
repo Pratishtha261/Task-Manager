@@ -8,8 +8,8 @@ This is a full-stack Task Manager I built using React on the frontend and Expres
 
 ## Live Demo Links
 
-- Frontend: https://pratishtha261.github.io/my-project/
-- Backend: Run locally at http://localhost:4000 or host separately for full API access.
+- Frontend URL: https://task-manager-seven-swart-19.vercel.app/
+- Backend URL: https://task-manager-backend-x1gh.onrender.com
 
 ## Tech Stack
 
