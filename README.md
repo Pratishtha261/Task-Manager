@@ -1,6 +1,6 @@
 # Personal Task Manager
 
-This is a full-stack Task Manager I built using React on the frontend and Express on the backend. The app is designed to be beginner-friendly, and easy to explain, while still supporting task creation, editing, filtering, and persistent storage.
+This is a full-stack Task Manager I built using React on the frontend and Express on the backend. The app is designed to be beginner-friendly, and easy to use, while still supporting task creation, editing, filtering, and persistent storage.
 
 ## Project Title & Brief Description
 
@@ -10,6 +10,57 @@ This is a full-stack Task Manager I built using React on the frontend and Expres
 
 - Frontend: [add deployed frontend URL here]
 - Backend: [add deployed backend URL here]
+
+## Tech Stack
+
+- Frontend: React and Vite. 
+    - React is used for component-based UI and state management, and Vite provides fast development and build tooling.
+- Styling: plain CSS to keep the interface simple.
+- Backend: Node.js and Express. 
+    - Express provides lightweight REST API routing, and Node.js is used to run the server and read/write JSON storage.
+- Storage: JSON file (`server/tasks.json`) so task state persists without adding a database dependency.
+
+## Project Structure
+
+```
+TASK MANAGER/
+  server/
+    index.js        # Express server and REST API routes
+    tasks.json      # persisted tasks storage
+    package.json    # backend dependencies and scripts
+  client/
+    src/
+      App.jsx       # main React app with task UI and API calls
+      styles.css    # CSS styling and responsive layout
+      main.jsx      # React entry point
+    index.html      # app shell for the frontend
+    package.json    # frontend dependencies and scripts
+    vite.config.js  # Vite configuration
+```
+
+## How to Run Locally
+
+1. Start the backend:
+
+```bash
+cd "c:\Users\user\Desktop\TASK MANAGER\server"
+npm install
+npm run dev
+```
+
+2. Start the frontend:
+
+```bash
+cd "c:\Users\user\Desktop\TASK MANAGER\client"
+npm install
+npm run dev
+```
+
+3. Open the app in your browser:
+
+```bash
+http://localhost:5173
+```
 
 ## API Documentation
 
@@ -71,57 +122,6 @@ This is a full-stack Task Manager I built using React on the frontend and Expres
     "message": "Task deleted"
   }
   ```
-
-## Project Structure
-
-```
-TASK MANAGER/
-  server/
-    index.js        # Express server and REST API routes
-    tasks.json      # persisted tasks storage
-    package.json    # backend dependencies and scripts
-  client/
-    src/
-      App.jsx       # main React app with task UI and API calls
-      styles.css    # CSS styling and responsive layout
-      main.jsx      # React entry point
-    index.html      # app shell for the frontend
-    package.json    # frontend dependencies and scripts
-    vite.config.js  # Vite configuration
-```
-
-## How to Run Locally
-
-Assuming Node.js is installed, these commands will install dependencies and start both the backend and frontend.
-
-1. Start the backend:
-
-```bash
-cd "c:\Users\user\Desktop\TASK MANAGER\server"
-npm install
-npm run dev
-```
-
-2. Start the frontend:
-
-```bash
-cd "c:\Users\user\Desktop\TASK MANAGER\client"
-npm install
-npm run dev
-```
-
-3. Open the app in your browser:
-
-```bash
-http://localhost:5173
-```
-
-## Tech Stack
-
-- Frontend: React and Vite. React is used for component-based UI and state management, and Vite provides fast development and build tooling.
-- Styling: plain CSS to keep the interface simple and easy to explain.
-- Backend: Node.js and Express. Express provides lightweight REST API routing, and Node.js is used to run the server and read/write JSON storage.
-- Storage: JSON file (`server/tasks.json`) so task state persists without adding a database dependency.
 
 ## Next Steps
 
