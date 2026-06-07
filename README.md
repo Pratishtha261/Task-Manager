@@ -1,28 +1,29 @@
 # Personal Task Manager
 
-A beginner-friendly full stack project using Node.js + Express for the backend and React for the frontend.
+This is a simple full-stack task manager I built using React on the frontend and Express on the backend.
+
+I wanted something lightweight where I could:
+- create and edit tasks,
+- set priorities and due dates,
+- mark tasks complete,
+- and keep task data saved in a JSON file.
 
 ## Project Structure
 
-- `server/` - backend code with REST APIs and JSON file storage
-- `client/` - frontend React app with task cards, filters, and responsive UI
+- `server/` - backend code with REST APIs and JSON storage
+- `client/` - frontend React app with responsive UI and task management features
 
-## Backend Files
+## What I Built
 
-- `server/package.json` - backend dependencies and scripts
-- `server/index.js` - Express server, task routes, validation, and error handling
-- `server/tasks.json` - persisted tasks (created automatically)
+- Task creation with `title`, `description`, `dueDate`, and `priority`
+- Task cards with overdue and completed states
+- Filters for All / Active / Completed tasks
+- Search by title
+- A dashboard overview with total, active, completed, and due-today counts
+- Due Today and Upcoming (7 days) sections on the home panel
+- Persistent task storage in `server/tasks.json`
 
-## Frontend Files
-
-- `client/package.json` - frontend dependencies and Vite scripts
-- `client/vite.config.js` - Vite configuration for React
-- `client/index.html` - HTML shell for the React app
-- `client/src/main.jsx` - React entry point
-- `client/src/App.jsx` - main application component with UI and API calls
-- `client/src/styles.css` - app styling and layout
-
-## Setup and Run
+## How to Run Locally
 
 1. Start the backend:
 
@@ -40,62 +41,36 @@ npm install
 npm run dev
 ```
 
-3. Open your browser at `http://localhost:5173`.
+3. Open the app in your browser at:
 
-## Features
+```bash
+http://localhost:5173
+```
 
-- Add tasks with `title`, `description`, `dueDate`, and `priority` (Low/Medium/High)
-- View tasks as cards with overdue highlighting
-- Mark tasks complete/incomplete
-- Edit and delete tasks with confirmation
-- Filter tasks: All / Active / Completed
-- Search tasks by title
-- Show `Due Today` and `Upcoming (7 days)` sections
-- Tasks persisted in `server/tasks.json`
+## Tech Stack
 
-## Additional Information
+- Frontend: React, Vite, plain CSS
+- Backend: Node.js, Express
+- Storage: JSON file (`server/tasks.json`)
 
-### Tech Stack
+## API Endpoints
 
-Frontend:
-- React
-- Vite
-- Plain CSS
+- `GET /tasks` – fetch all tasks
+- `POST /tasks` – add a new task
+- `PUT /tasks/:id` – update a task
+- `DELETE /tasks/:id` – remove a task
 
-Backend:
-- Node.js
-- Express
+## Notes
 
-Storage:
-- JSON file (`server/tasks.json`)
+- Tasks persist in `server/tasks.json` so the data remains after restarting the server.
+- The app is intentionally simple and beginner-friendly.
+- I kept the architecture straightforward so the project is easy to explain and maintain.
 
-### Live Demo Links
+## What I Would Improve Next
 
-- Frontend: Not deployed yet
-- Backend: Not deployed yet
+- add authentication,
+- make task order draggable,
+- add tests,
+- replace JSON storage with a proper database.
 
-### API Documentation
-
-- `GET /tasks` → Fetch all tasks. Supports optional `?search=` query to filter by title.
-- `POST /tasks` → Create a new task. Body: `{ title, description, dueDate, priority }`.
-- `PUT /tasks/:id` → Update an existing task. Body may include `title`, `description`, `dueDate`, `completed`, `priority`.
-- `DELETE /tasks/:id` → Delete a task.
-- `PATCH /tasks/:id` → (Suggested) Toggle complete/incomplete. Current implementation uses `PUT` to update `completed`.
-
-### Next Steps (if given more time)
-
-- Add user authentication
-- Add drag-and-drop task ordering
-- Add automated testing (unit and integration tests)
-- Improve accessibility and mobile responsiveness
-- Use a real database (e.g., MongoDB) instead of JSON storage
-
-### Notes
-
-- Tasks are stored in `server/tasks.json` and persist across server restarts.
-- The application follows a simple full-stack CRUD architecture with a clear separation between frontend and backend.
-- The backend validates required fields (title) and returns meaningful HTTP status codes for errors.
-
----
-
-If you'd like, I can add a small `curl` examples section showing how to call the API endpoints, or prepare a Postman collection for quick testing.
+If you want, I can also add a short section on the main design choices or include a few `curl` examples for the backend API.

@@ -16,12 +16,10 @@ function App() {
   const [error, setError] = useState('');
   const [showHome, setShowHome] = useState(true);
 
-  // Load tasks from backend on first render
   useEffect(() => {
     fetchTasks();
   }, []);
 
-  // Helper to show temporary messages
   function showNotification(text) {
     setMessage(text);
     setTimeout(() => setMessage(''), 3000);
@@ -135,7 +133,6 @@ function App() {
     return new Date(task.dueDate) < new Date();
   }
 
-  // Tasks due today (not completed)
   const dueTodayTasks = tasks.filter((task) => {
     if (!task.dueDate || task.completed) return false;
     const due = new Date(task.dueDate);
@@ -147,7 +144,6 @@ function App() {
     );
   });
 
-  // Tasks due in the next 7 days (excluding today), not completed
   const upcomingTasks = tasks.filter((task) => {
     if (!task.dueDate || task.completed) return false;
     const due = new Date(task.dueDate);
@@ -163,7 +159,6 @@ function App() {
     setShowHome(false);
     setFilter('All');
     setSearchTerm('');
-    // Scroll to tasks after the UI updates
     setTimeout(() => {
       if (tasksRef.current) tasksRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 150);
