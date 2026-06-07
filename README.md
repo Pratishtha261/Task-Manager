@@ -1,10 +1,8 @@
 # Task Manager
 
-This is a full-stack Task Manager I built using React on the frontend and Express on the backend. The app is designed to be beginner-friendly, and easy to use, while still supporting task creation, editing, filtering, and persistent storage.
-
 ## Project Title & Brief Description
 
-**Task Manager** is a lightweight task tracking app that allows users to add tasks with a title, description, due date, and priority. It includes a dashboard summary, task cards, filters, search, and sections for tasks due today and upcoming tasks.
+**Task Manager** is a lightweight task tracking app that allows users to add tasks with a title, description, due date, and priority. It includes a dashboard summary, task cards, filters, search, and sections for tasks due today and upcoming tasks. This is a full-stack Task Manager I built using React on the frontend and Express on the backend. The app is designed to be beginner-friendly, and easy to use, while still supporting task creation, editing, filtering, and persistent storage.
 
 ## Live Demo Links
 
@@ -23,19 +21,23 @@ This is a full-stack Task Manager I built using React on the frontend and Expres
 ## Project Structure
 
 ```
-TASK MANAGER/
-  server/
-    index.js        # Express server and REST API routes
-    tasks.json      # persisted tasks storage
-    package.json    # backend dependencies and scripts
-  client/
-    src/
-      App.jsx       # main React app with task UI and API calls
-      styles.css    # CSS styling and responsive layout
-      main.jsx      # React entry point
-    index.html      # app shell for the frontend
-    package.json    # frontend dependencies and scripts
-    vite.config.js  # Vite configuration
+TASK-MANAGER/
+├── server/
+│   ├── index.js          
+│   ├── tasks.json        
+│   └── package.json      
+│
+├── client/
+│   ├── src/
+│   │   ├── App.jsx       
+│   │   ├── styles.css   
+│   │   └── main.jsx      
+│   │
+│   ├── index.html        
+│   ├── package.json     
+│   └── vite.config.js   
+│
+└── README.md
 ```
 
 ## How to Run Locally
@@ -43,7 +45,7 @@ TASK MANAGER/
 1. Start the backend:
 
 ```bash
-cd "c:\Users\user\Desktop\TASK MANAGER\server"
+cd backend
 npm install
 npm run dev
 ```
@@ -51,7 +53,7 @@ npm run dev
 2. Start the frontend:
 
 ```bash
-cd "c:\Users\user\Desktop\TASK MANAGER\client"
+cd frontend
 npm install
 npm run dev
 ```
