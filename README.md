@@ -1,27 +1,89 @@
 # Personal Task Manager
 
-This is a full-stack task manager I built using React on the frontend and Express on the backend.
+I chose the task manager exercise and built a full-stack app with React on the frontend and Express on the backend. The app is designed to be simple, beginner-friendly, and easy to explain, while still supporting task creation, editing, filtering, and persistent storage.
 
-I wanted something lightweight where I could:
-- create and edit tasks,
-- set priorities and due dates,
-- mark tasks complete,
-- and keep task data saved in a JSON file.
+## Project Title & Brief Description
+
+**Task Manager** is a lightweight task tracking app that allows users to add tasks with a title, description, due date, and priority. It includes a dashboard summary, task cards, filters, search, and sections for tasks due today and upcoming tasks.
+
+## API Documentation
+
+### `GET /tasks`
+- Method: `GET`
+- Path: `/tasks`
+- Request body: none
+- Response:
+  ```json
+  [
+    {
+      "id": 1,
+      "title": "Buy groceries",
+      "description": "Milk, eggs, bread",
+      "dueDate": "2026-06-08",
+      "priority": "Medium",
+      "completed": false,
+      "createdAt": "2026-06-06T12:34:56.789Z"
+    }
+  ]
+  ```
+
+### `POST /tasks`
+- Method: `POST`
+- Path: `/tasks`
+- Request body:
+  ```json
+  {
+    "title": "Task title",
+    "description": "Task details",
+    "dueDate": "2026-06-08",
+    "priority": "Medium"
+  }
+  ```
+- Response: the created task object, including `id`, `completed`, and `createdAt`
+
+### `PUT /tasks/:id`
+- Method: `PUT`
+- Path: `/tasks/:id`
+- Request body:
+  ```json
+  {
+    "title": "Updated title",
+    "description": "Updated description",
+    "dueDate": "2026-06-09",
+    "priority": "High",
+    "completed": true
+  }
+  ```
+- Response: the updated task object
+
+### `DELETE /tasks/:id`
+- Method: `DELETE`
+- Path: `/tasks/:id`
+- Request body: none
+- Response:
+  ```json
+  {
+    "message": "Task deleted"
+  }
+  ```
 
 ## Project Structure
 
-- `server/` - backend code with REST APIs and JSON storage
-- `client/` - frontend React app with responsive UI and task management features
-
-## What I Built
-
-- Task creation with `title`, `description`, `dueDate`, and `priority`
-- Task cards with overdue and completed states
-- Filters for All / Active / Completed tasks
-- Search by title
-- A dashboard overview with total, active, completed, and due-today counts
-- Due Today and Upcoming (7 days) sections on the home panel
-- Persistent task storage in `server/tasks.json`
+```
+TASK MANAGER/
+  server/
+    index.js        # Express server and REST API routes
+    tasks.json      # persisted tasks storage
+    package.json    # backend dependencies and scripts
+  client/
+    src/
+      App.jsx       # main React app with task UI and API calls
+      styles.css    # CSS styling and responsive layout
+      main.jsx      # React entry point
+    index.html      # app shell for the frontend
+    package.json    # frontend dependencies and scripts
+    vite.config.js  # Vite configuration
+```
 
 ## How to Run Locally
 
@@ -41,7 +103,7 @@ npm install
 npm run dev
 ```
 
-3. Open the app in your browser at:
+3. Open the app in your browser:
 
 ```bash
 http://localhost:5173
@@ -53,24 +115,26 @@ http://localhost:5173
 - Backend: Node.js, Express
 - Storage: JSON file (`server/tasks.json`)
 
-## API Endpoints
+## Next Steps
 
-- `GET /tasks` – fetch all tasks
-- `POST /tasks` – add a new task
-- `PUT /tasks/:id` – update a task
-- `DELETE /tasks/:id` – remove a task
+### What I chose not to do yet
+- Add user authentication and login
+- Replace JSON storage with a database
+- Add drag-and-drop task ordering
+- Add automated tests
+- Add real deployment / hosting
+
+### What I would build next
+- Add a simple auth flow and user sessions
+- Use SQLite or MongoDB instead of JSON storage
+- Add drag-and-drop task ordering
+- Add test coverage for the backend and frontend
+- Improve mobile layout and accessibility
 
 ## Notes
 
-- Tasks persist in `server/tasks.json` so the data remains after restarting the server.
-- The app is intentionally simple and beginner-friendly.
-- I kept the architecture straightforward so the project is easy to explain and maintain.
+- Tasks persist in `server/tasks.json`, so data stays after restarting the server.
+- The app focuses on straightforward CRUD functionality and a clean UI.
+- I kept the structure simple so it is easy to explain in an interview.
 
-## What I Would Improve Next
 
-- add authentication,
-- make task order draggable,
-- add tests,
-- replace JSON storage with a proper database.
-
-If you want, I can also add a short section on the main design choices or include a few `curl` examples for the backend API.
