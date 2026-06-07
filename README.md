@@ -1,4 +1,4 @@
-# Personal Task Manager
+# Task Manager
 
 This is a full-stack Task Manager I built using React on the frontend and Express on the backend. The app is designed to be beginner-friendly, and easy to use, while still supporting task creation, editing, filtering, and persistent storage.
 
