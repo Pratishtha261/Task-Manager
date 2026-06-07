@@ -119,7 +119,17 @@ app.delete('/tasks/:id', (req, res) => {
   res.json({ message: 'Task deleted successfully.' });
 });
 
-// Catch-all 404 handler for unspecified routes
+// Serve the client build in production
+if (process.env.NODE_ENV === 'production') {
+  const clientBuildPath = path.join(__dirname, '..', 'client', 'dist');
+  app.use(express.static(clientBuildPath));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(clientBuildPath, 'index.html'));
+  });
+}
+
+// Catch-all 404 handler for unspecified routes in development
 app.use((req, res) => {
   res.status(404).json({ error: 'Route not found.' });
 });
