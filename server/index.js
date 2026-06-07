@@ -120,14 +120,9 @@ app.delete('/tasks/:id', (req, res) => {
 });
 
 // Serve the client build in production
-if (process.env.NODE_ENV === 'production') {
-  const clientBuildPath = path.join(__dirname, '..', 'client', 'dist');
-  app.use(express.static(clientBuildPath));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(clientBuildPath, 'index.html'));
-  });
-}
+app.get('/', (req, res) => {
+  res.json({ message: 'Task Manager API is running' });
+});
 
 // Catch-all 404 handler for unspecified routes in development
 app.use((req, res) => {
