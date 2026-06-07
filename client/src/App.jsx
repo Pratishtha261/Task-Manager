@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 
-const BACKEND_URL = 'http://localhost:4000';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || '';
+const LOCAL_TASKS_KEY = 'task-manager-local-tasks';
 const priorities = ['Low', 'Medium', 'High'];
 
 function App() {
@@ -14,7 +15,9 @@ function App() {
   const [editingTask, setEditingTask] = useState(null);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [isOffline, setIsOffline] = useState(false);
   const [showHome, setShowHome] = useState(true);
+  const tasksRef = useRef(null);
 
   useEffect(() => {
     fetchTasks();
@@ -25,53 +28,59 @@ function App() {
     setTimeout(() => setMessage(''), 3000);
   }
 
-  async function fetchTasks() {
+  function loadLocalTasks() {
+    const raw = window.localStorage.getItem(LOCAL_TASKS_KEY);
+    if (!raw) return [];
+
     try {
-      const response = await fetch(`${BACKEND_URL}/tasks`);
-      const data = await response.json();
-      setTasks(data);
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
     } catch (err) {
-      setError('Unable to load tasks.');
+      console.warn('Failed to parse saved tasks from local storage.', err);
+      return [];
     }
   }
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    setError('');
+  function saveLocalTasks(list) {
+    window.localStorage.setItem(LOCAL_TASKS_KEY, JSON.stringify(list));
+  }
 
-    if (!title.trim()) {
-      setError('Task title is required.');
-      return;
+  function updateOfflineState(active) {
+    setIsOffline(active);
+    if (active) {
+      setError('Backend unavailable: using browser storage only.');
+    } else {
+      setError('');
     }
+  }
 
-    const payload = {
-      title: title.trim(),
-      description: description.trim(),
-      dueDate,
-      priority
-    };
-
+  async function apiRequest(path, options = {}) {
     try {
-      if (editingTask) {
-        await fetch(`${BACKEND_URL}/tasks/${editingTask.id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        showNotification('Task updated successfully.');
-      } else {
-        await fetch(`${BACKEND_URL}/tasks`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        showNotification('Task added successfully.');
+      const response = await fetch(`${BACKEND_URL}${path}`, options);
+      if (!response.ok) {
+        throw new Error(response.statusText || 'Request failed');
       }
-
-      resetForm();
-      fetchTasks();
+      updateOfflineState(false);
+      return await response.json();
     } catch (err) {
-      setError('Unable to save task.');
+      console.warn('Backend request failed, falling back to local storage:', err);
+      updateOfflineState(true);
+      return null;
+    }
+  }
+
+  function saveTasksToState(list) {
+    setTasks(list);
+    saveLocalTasks(list);
+  }
+
+  async function fetchTasks() {
+    const result = await apiRequest('/tasks');
+    if (result) {
+      setTasks(result);
+      saveLocalTasks(result);
+    } else {
+      setTasks(loadLocalTasks());
     }
   }
 
@@ -91,31 +100,107 @@ function App() {
     setPriority(task.priority || 'Medium');
   }
 
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setError('');
+
+    if (!title.trim()) {
+      setError('Task title is required.');
+      return;
+    }
+
+    const payload = {
+      title: title.trim(),
+      description: description.trim(),
+      dueDate,
+      priority
+    };
+
+    if (editingTask) {
+      const updatedTask = await apiRequest(`/tasks/${editingTask.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...payload, completed: editingTask.completed })
+      });
+
+      if (updatedTask) {
+        showNotification('Task updated successfully.');
+        resetForm();
+        fetchTasks();
+        return;
+      }
+
+      const localUpdate = tasks.map((task) =>
+        task.id === editingTask.id ? { ...task, ...payload } : task
+      );
+      saveTasksToState(localUpdate);
+      showNotification('Task updated locally.');
+      resetForm();
+      return;
+    }
+
+    const newTask = await apiRequest('/tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (newTask) {
+      showNotification('Task added successfully.');
+      resetForm();
+      fetchTasks();
+      return;
+    }
+
+    const fallbackTask = {
+      id: Date.now().toString(),
+      title: payload.title,
+      description: payload.description,
+      dueDate: payload.dueDate,
+      completed: false,
+      createdAt: new Date().toISOString(),
+      priority: payload.priority
+    };
+
+    saveTasksToState([fallbackTask, ...tasks]);
+    showNotification('Task saved locally.');
+    resetForm();
+  }
+
   async function handleDelete(taskId) {
     const confirmed = window.confirm('Delete this task?');
     if (!confirmed) return;
 
-    try {
-      await fetch(`${BACKEND_URL}/tasks/${taskId}`, { method: 'DELETE' });
+    const response = await apiRequest(`/tasks/${taskId}`, { method: 'DELETE' });
+    if (response) {
       showNotification('Task deleted successfully.');
       fetchTasks();
-    } catch (err) {
-      setError('Unable to delete task.');
+      return;
     }
+
+    const localUpdate = tasks.filter((task) => task.id !== taskId);
+    saveTasksToState(localUpdate);
+    showNotification('Task removed locally.');
   }
 
   async function toggleCompleted(task) {
-    try {
-      await fetch(`${BACKEND_URL}/tasks/${task.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ completed: !task.completed })
-      });
+    const response = await apiRequest(`/tasks/${task.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ completed: !task.completed })
+    });
+
+    if (response) {
       fetchTasks();
       showNotification(task.completed ? 'Marked incomplete.' : 'Marked complete.');
-    } catch (err) {
-      setError('Unable to update task.');
+      return;
     }
+
+    const localUpdate = tasks.map((item) =>
+      item.id === task.id ? { ...item, completed: !item.completed } : item
+    );
+    saveTasksToState(localUpdate);
+    showNotification(task.completed ? 'Marked incomplete locally.' : 'Marked complete locally.');
   }
 
   const filteredTasks = tasks

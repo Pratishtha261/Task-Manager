@@ -8,8 +8,8 @@ This is a full-stack Task Manager I built using React on the frontend and Expres
 
 ## Live Demo Links
 
-- Frontend: [add deployed frontend URL here]
-- Backend: [add deployed backend URL here]
+- Frontend: https://pratishtha261.github.io/my-project/
+- Backend: Run locally at http://localhost:4000 or host separately for full API access.
 
 ## Tech Stack
 
@@ -61,6 +61,8 @@ npm run dev
 ```bash
 http://localhost:5173
 ```
+
+> Note: The frontend now supports GitHub Pages deployment and can fall back to browser storage if the backend is not available in a static hosting environment.
 
 ## API Documentation
 
@@ -130,7 +132,7 @@ http://localhost:5173
 - Replace JSON storage with a database
 - Add drag-and-drop task ordering
 - Add automated tests
-- Add real deployment / hosting
+- Add a hosted backend service for the live demo
 
 ### What I would build next
 - Add a simple auth flow and user sessions
