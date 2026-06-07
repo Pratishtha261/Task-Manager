@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 
-const BACKEND_URL = 'http://localhost:4000';
+const BACKEND_URL = 'https://task-manager-backend-x1gh.onrender.com';
 const LOCAL_TASKS_KEY = 'task-manager-local-tasks';
 const priorities = ['Low', 'Medium', 'High'];
 
