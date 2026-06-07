@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || '';
+const BACKEND_URL = 'http://localhost:4000';
 const LOCAL_TASKS_KEY = 'task-manager-local-tasks';
 const priorities = ['Low', 'Medium', 'High'];
 
@@ -238,7 +238,6 @@ function App() {
     return due >= start && due <= end;
   });
 
-  const tasksRef = useRef(null);
 
   function handleSeeAllTasks() {
     setShowHome(false);
