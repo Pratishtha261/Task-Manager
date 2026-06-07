@@ -64,8 +64,6 @@ npm run dev
 http://localhost:5173
 ```
 
-> Note: The frontend now supports GitHub Pages deployment and can fall back to browser storage if the backend is not available in a static hosting environment.
-
 ## API Documentation
 
 ### `GET /tasks`
